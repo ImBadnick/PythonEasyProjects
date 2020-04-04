@@ -11,7 +11,10 @@ import numpy as np
 def __DataTableUpToDate(file):
     #Open the .csv file for read the data.
     df = pd.read_csv('COVID-19-REPORTS/'+file)
-    df = df[['Province/State','Country/Region','Confirmed', 'Deaths', 'Recovered']]
+    try:
+        df = df[['Province/State','Country/Region','Confirmed', 'Deaths', 'Recovered']]
+    except KeyError:
+        df = df[['Province_State','Country_Region','Confirmed', 'Deaths', 'Recovered']]
     df.columns.values[0]="ProvinceState" #Cambio il nome delle colonna 0
     df.columns.values[1]="CountryRegion" #Cambio il nome delle colonna 1
     #Trying to connect to db
