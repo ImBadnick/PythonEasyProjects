@@ -22,7 +22,10 @@ def data():
                         if (row_count == 0):
                             #Taking columns and values from .csv file
                             df = pd.read_csv('COVID-19-REPORTS/'+filename)
-                            df = df[['Province/State','Country/Region','Confirmed', 'Deaths', 'Recovered']]
+                            try:
+                                df = df[['Province/State','Country/Region','Confirmed', 'Deaths', 'Recovered']]
+                            except KeyError:
+                                df = df[['Province_State','Country_Region','Confirmed', 'Deaths', 'Recovered']]
                             df.columns.values[0]="ProvinceState"
                             df.columns.values[1]="CountryRegion"
                             #Foreach row in the file, it does insert in the db.
